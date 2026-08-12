@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Đặt hàng thành công - My Shop</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #0b0d12;
+            color: white;
+        }
+
+        header {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+            background: #0f1117;
+            border-bottom: 1px solid #242833;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #6c63ff;
+        }
+
+        header a {
+            color: #aaa;
+            text-decoration: none;
+        }
+
+        header a:hover {
+            color: white;
+        }
+
+        .page {
+            max-width: 650px;
+            margin: 70px auto;
+            padding: 20px;
+        }
+
+        .box {
+            background: #151821;
+            border: 1px solid #292d38;
+            border-radius: 18px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #172b21;
+            border: 1px solid #285b3c;
+            font-size: 38px;
+        }
+
+        h1 {
+            margin: 0 0 10px;
+            font-size: 30px;
+        }
+
+        .subtitle {
+            color: #888;
+            margin-bottom: 30px;
+        }
+
+        .order-id {
+            padding: 18px;
+            margin-bottom: 25px;
+            background: #101218;
+            border: 1px solid #292d38;
+            border-radius: 12px;
+        }
+
+        .order-label {
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 7px;
+        }
+
+        .order-number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #8d86ff;
+        }
+
+        .details {
+            text-align: left;
+            background: #101218;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 12px 0;
+            border-bottom: 1px solid #242833;
+        }
+
+        .row:last-child {
+            border-bottom: none;
+        }
+
+        .label {
+            color: #777;
+        }
+
+        .value {
+            text-align: right;
+            color: #ddd;
+            font-weight: 500;
+        }
+
+        .price {
+            font-weight: bold;
+        }
+
+        .status {
+            display: inline-block;
+            margin-bottom: 25px;
+            padding: 8px 14px;
+            border-radius: 20px;
+            background: #302b14;
+            color: #e6c84d;
+            font-size: 14px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            background: #6c63ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 9px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #7b73ff;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 600px) {
+
+            .page {
+                margin: 30px auto;
+            }
+
+            .box {
+                padding: 30px 20px;
+            }
+
+            .row {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .value {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        My <span>Shop</span>
+    </div>
+
+    <a href="/">
+        Trang chủ
+    </a>
+
+</header>
+
+
+<div class="page">
+
+    <div class="box">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <h1>
+            Đặt hàng thành công!
+        </h1>
+
+        <p class="subtitle">
+            Đơn hàng của bạn đã được ghi nhận.
+        </p>
+
+
+        <!-- MÃ ĐƠN -->
+
+        <div class="order-id">
+
+            <div class="order-label">
+                MÃ ĐƠN HÀNG
+            </div>
+
+            <div class="order-number">
+                #<%= order.id %>
+            </div>
+
+        </div>
+
+
+        <!-- TRẠNG THÁI -->
+
+        <div class="status">
+            🟡 Chờ xử lý
+        </div>
+
+
+        <!-- CHI TIẾT -->
+
+        <div class="details">
+
+            <div class="row">
+
+                <span class="label">
+                    Sản phẩm
+                </span>
+
+                <span class="value">
+                    <%= order.product %>
+                </span>
+
+            </div>
+
+
+            <div class="row">
+
+                <span class="label">
+                    Khách hàng
+                </span>
+
+                <span class="value">
+                    <%= order.name %>
+                </span>
+
+            </div>
+
+
+            <div class="row">
+
+                <span class="label">
+                    Email
+                </span>
+
+                <span class="value">
+                    <%= order.email %>
+                </span>
+
+            </div>
+
+
+            <div class="row">
+
+                <span class="label">
+                    Giá
+                </span>
+
+                <span class="value price">
+                    <%= order.price %>
+                </span>
+
+            </div>
+
+
+            <div class="row">
+
+                <span class="label">
+                    Thời gian
+                </span>
+
+                <span class="value">
+                    <%= order.time %>
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <a href="/" class="btn">
+            ← Quay lại trang chủ
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

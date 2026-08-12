@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Shop - Dịch vụ Online</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: #0b0d12;
+            color: white;
+        }
+
+        /* HEADER */
+
+        header {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+            background: rgba(15, 17, 23, 0.95);
+            border-bottom: 1px solid #242833;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #6c63ff;
+        }
+
+        nav a {
+            color: #aaa;
+            text-decoration: none;
+            margin-left: 25px;
+            transition: 0.2s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 20px;
+            background:
+                radial-gradient(
+                    circle at center,
+                    #20204a 0%,
+                    #10121a 45%,
+                    #0b0d12 75%
+                );
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 50px;
+            background: #1c1b3a;
+            color: #9c96ff;
+            border: 1px solid #36326e;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            margin: 10px 0 20px;
+            line-height: 1.1;
+        }
+
+        .hero h1 span {
+            color: #6c63ff;
+        }
+
+        .hero p {
+            color: #999;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 14px 28px;
+            background: #6c63ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 9px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-2px);
+            background: #7b73ff;
+        }
+
+        /* PRODUCTS */
+
+        .products {
+            padding: 80px 8% 100px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #777;
+        }
+
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .product {
+            position: relative;
+            background: #151821;
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid #292d38;
+            transition: 0.25s;
+        }
+
+        .product:hover {
+            transform: translateY(-6px);
+            border-color: #6c63ff;
+        }
+
+        .popular {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            background: #6c63ff;
+            font-size: 12px;
+        }
+
+        .product-icon {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .product h3 {
+            font-size: 21px;
+            margin-bottom: 10px;
+        }
+
+        .product p {
+            color: #888;
+            line-height: 1.5;
+            min-height: 45px;
+        }
+
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 25px 0;
+        }
+
+        .btn {
+            display: block;
+            text-align: center;
+            padding: 13px 20px;
+            background: #6c63ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #7b73ff;
+        }
+
+        /* INFO */
+
+        .info {
+            padding: 20px 8% 80px;
+        }
+
+        .info-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .info-box {
+            text-align: center;
+            padding: 25px;
+            background: #151821;
+            border: 1px solid #292d38;
+            border-radius: 14px;
+        }
+
+        .info-box .icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .info-box h3 {
+            margin: 10px 0;
+        }
+
+        .info-box p {
+            color: #888;
+            margin: 0;
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid #242833;
+            color: #666;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            header {
+                padding: 0 5%;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .product-list {
+                grid-template-columns: 1fr;
+            }
+
+            .info-list {
+                grid-template-columns: 1fr;
+            }
+
+            nav a {
+                margin-left: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        My <span>Shop</span>
+    </div>
+
+    <nav>
+        <a href="/">Trang chủ</a>
+        <a href="#products">Dịch vụ</a>
+    </nav>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            ⚡ Dịch vụ online nhanh chóng
+        </div>
+
+        <h1>
+            Chào mừng đến<br>
+            <span>My Shop</span>
+        </h1>
+
+        <p>
+            Cung cấp các dịch vụ online nhanh chóng,
+            tiện lợi và dễ sử dụng.
+        </p>
+
+        <a href="#products" class="hero-btn">
+            🛍️ Xem dịch vụ
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+
+<section class="products" id="products">
+
+    <div class="section-title">
+
+        <h2>Dịch vụ của chúng tôi</h2>
+
+        <p>
+            Chọn dịch vụ phù hợp với nhu cầu của bạn
+        </p>
+
+    </div>
+
+
+    <div class="product-list">
+
+
+        <!-- DỊCH VỤ 01 -->
+
+        <div class="product">
+
+            <div class="product-icon">
+                ⚡
+            </div>
+
+            <h3>
+                Dịch vụ 01
+            </h3>
+
+            <p>
+                Mô tả chi tiết dịch vụ 01.
+            </p>
+
+            <div class="price">
+                10.000đ
+            </div>
+
+            <a href="/product/1" class="btn">
+                Xem dịch vụ →
+            </a>
+
+        </div>
+
+
+        <!-- DỊCH VỤ 02 -->
+
+        <div class="product">
+
+            <div class="popular">
+                PHỔ BIẾN
+            </div>
+
+            <div class="product-icon">
+                🔥
+            </div>
+
+            <h3>
+                Dịch vụ 02
+            </h3>
+
+            <p>
+                Mô tả chi tiết dịch vụ 02.
+            </p>
+
+            <div class="price">
+                20.000đ
+            </div>
+
+            <a href="/product/2" class="btn">
+                Xem dịch vụ →
+            </a>
+
+        </div>
+
+
+        <!-- DỊCH VỤ 03 -->
+
+        <div class="product">
+
+            <div class="product-icon">
+                💎
+            </div>
+
+            <h3>
+                Dịch vụ 03
+            </h3>
+
+            <p>
+                Mô tả chi tiết dịch vụ 03.
+            </p>
+
+            <div class="price">
+                50.000đ
+            </div>
+
+            <a href="/product/3" class="btn">
+                Xem dịch vụ →
+            </a>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- INFO -->
+
+<section class="info">
+
+    <div class="info-list">
+
+        <div class="info-box">
+
+            <div class="icon">
+                ⚡
+            </div>
+
+            <h3>
+                Nhanh chóng
+            </h3>
+
+            <p>
+                Xử lý đơn hàng nhanh chóng.
+            </p>
+
+        </div>
+
+
+        <div class="info-box">
+
+            <div class="icon">
+                🔒
+            </div>
+
+            <h3>
+                An toàn
+            </h3>
+
+            <p>
+                Thông tin đơn hàng được lưu trữ an toàn.
+            </p>
+
+        </div>
+
+
+        <div class="info-box">
+
+            <div class="icon">
+                💬
+            </div>
+
+            <h3>
+                Hỗ trợ
+            </h3>
+
+            <p>
+                Hỗ trợ khách hàng khi cần thiết.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    © 2026 My Shop — All rights reserved.
+
+</footer>
+
+</body>
+</html>

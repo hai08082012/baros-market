@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Đặt hàng - My Shop</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #0b0d12;
+            color: white;
+        }
+
+        header {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+            background: #0f1117;
+            border-bottom: 1px solid #242833;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #6c63ff;
+        }
+
+        header a {
+            color: #aaa;
+            text-decoration: none;
+        }
+
+        header a:hover {
+            color: white;
+        }
+
+        .page {
+            max-width: 700px;
+            margin: 60px auto;
+            padding: 20px;
+        }
+
+        .container {
+            background: #151821;
+            border: 1px solid #292d38;
+            border-radius: 18px;
+            padding: 35px;
+        }
+
+        .title {
+            margin-bottom: 30px;
+        }
+
+        .title h1 {
+            margin: 0 0 10px;
+            font-size: 32px;
+        }
+
+        .title p {
+            margin: 0;
+            color: #888;
+        }
+
+        /* SẢN PHẨM */
+
+        .product-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 20px;
+            margin-bottom: 30px;
+            background: #101218;
+            border: 1px solid #292d38;
+            border-radius: 12px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .product-label {
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .price {
+            color: #fff;
+            font-size: 23px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        /* FORM */
+
+        .form-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #aaa;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+            border-radius: 9px;
+            background: #101218;
+            color: white;
+            font-size: 15px;
+        }
+
+        input::placeholder {
+            color: #666;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #6c63ff;
+        }
+
+        .note {
+            padding: 12px;
+            margin-bottom: 20px;
+            background: #15143a;
+            border: 1px solid #302c68;
+            border-radius: 9px;
+            color: #aaa;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #6c63ff;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #7b73ff;
+            transform: translateY(-1px);
+        }
+
+        .back {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #888;
+            text-decoration: none;
+        }
+
+        .back:hover {
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+
+            .page {
+                margin: 25px auto;
+            }
+
+            .container {
+                padding: 25px 20px;
+            }
+
+            .product-info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .price {
+                font-size: 21px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        My <span>Shop</span>
+    </div>
+
+    <a href="/">
+        Trang chủ
+    </a>
+
+</header>
+
+
+<div class="page">
+
+    <div class="container">
+
+        <div class="title">
+
+            <h1>
+                🛒 Đặt hàng
+            </h1>
+
+            <p>
+                Điền thông tin bên dưới để tạo đơn hàng.
+            </p>
+
+        </div>
+
+
+        <!-- THÔNG TIN SẢN PHẨM -->
+
+        <div class="product-info">
+
+            <div>
+
+                <div class="product-label">
+                    Sản phẩm
+                </div>
+
+                <div class="product-name">
+                    <%= product.name %>
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <div class="product-label">
+                    Giá
+                </div>
+
+                <div class="price">
+                    <%= product.price %>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <div class="form-title">
+            👤 Thông tin khách hàng
+        </div>
+
+
+        <div class="note">
+            ℹ️ Vui lòng nhập thông tin chính xác để
+            chúng tôi có thể liên hệ với bạn về đơn hàng.
+        </div>
+
+
+        <form action="/order" method="POST">
+
+            <input
+                type="hidden"
+                name="productId"
+                value="<%= product.id %>"
+            >
+
+
+            <label for="name">
+                Tên của bạn
+            </label>
+
+            <input
+                id="name"
+                type="text"
+                name="name"
+                placeholder="Nhập tên của bạn"
+                required
+                maxlength="100"
+            >
+
+
+            <label for="email">
+                Email
+            </label>
+
+            <input
+                id="email"
+                type="email"
+                name="email"
+                placeholder="example@gmail.com"
+                required
+                maxlength="150"
+            >
+
+
+            <button type="submit">
+                ✓ Xác nhận đặt hàng
+            </button>
+
+        </form>
+
+
+        <a href="/" class="back">
+            ← Quay lại trang chủ
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

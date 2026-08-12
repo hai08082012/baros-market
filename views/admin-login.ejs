@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login - My Shop</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: #0f1117;
+            color: white;
+        }
+
+        .login-box {
+            width: 380px;
+            max-width: 90%;
+            margin: 100px auto;
+            padding: 35px;
+            background: #181b24;
+            border: 1px solid #292d38;
+            border-radius: 15px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #aaa;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background: #101218;
+            color: white;
+            font-size: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #6c63ff;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .error {
+            padding: 12px;
+            margin-bottom: 20px;
+            background: #3a1d25;
+            border-radius: 8px;
+            color: #ff8c9b;
+            text-align: center;
+        }
+
+        .back {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #aaa;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <h1>🔐 Admin</h1>
+
+    <% if (error) { %>
+        <div class="error">
+            <%= error %>
+        </div>
+    <% } %>
+
+    <form action="/admin/login" method="POST">
+
+        <label>Tài khoản</label>
+
+        <input
+            type="text"
+            name="username"
+            placeholder="Nhập tài khoản"
+            required
+        >
+
+        <label>Mật khẩu</label>
+
+        <input
+            type="password"
+            name="password"
+            placeholder="Nhập mật khẩu"
+            required
+        >
+
+        <button type="submit">
+            Đăng nhập
+        </button>
+
+    </form>
+
+    <a href="/" class="back">
+        ← Quay lại trang chủ
+    </a>
+
+</div>
+
+</body>
+</html>
