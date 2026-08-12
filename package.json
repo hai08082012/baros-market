@@ -1,13 +1,13 @@
 {
-  "name": "my-shop",
+  "name": "baros-market",
   "version": "1.0.0",
-  "description": "",
+  "description": "Baro's Market",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Baro",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
