@@ -1,387 +1,376 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-    <title>Admin - My Shop</title>
+<title>Admin - Baro's Market</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+<style>
+*{
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
 
-        body {
-            margin: 0;
-            background: #0f1117;
-            color: white;
-        }
+body{
+    margin:0;
+    background:#0b0d12;
+    color:white;
+}
 
-        .container {
-            max-width: 1250px;
-            margin: 40px auto;
-            padding: 20px;
-        }
+.container{
+    width:94%;
+    max-width:1200px;
+    margin:40px auto;
+}
 
-        .top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
 
-        h1 {
-            margin: 0;
-            font-size: 28px;
-        }
+h1{
+    margin:0;
+}
 
-        .logout {
-            color: #aaa;
-            text-decoration: none;
-            padding: 10px 15px;
-            border: 1px solid #333;
-            border-radius: 8px;
-        }
+.logout{
+    background:#292d38;
+    color:white;
+    padding:10px 16px;
+    border-radius:8px;
+    text-decoration:none;
+}
 
-        .logout:hover {
-            color: white;
-            background: #1d2029;
-        }
+.box{
+    background:#151821;
+    border:1px solid #292d38;
+    border-radius:16px;
+    padding:25px;
+    margin-bottom:25px;
+}
 
-        /* THỐNG KÊ */
+h2{
+    margin-top:0;
+}
 
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-bottom: 25px;
-        }
+.table-wrap{
+    overflow-x:auto;
+}
 
-        .stat {
-            background: #181b24;
-            border: 1px solid #292d38;
-            border-radius: 14px;
-            padding: 20px;
-        }
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:700px;
+}
 
-        .stat-title {
-            color: #999;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
+th,td{
+    padding:14px 10px;
+    border-bottom:1px solid #292d38;
+    text-align:left;
+}
 
-        .stat-number {
-            font-size: 26px;
-            font-weight: bold;
-        }
+th{
+    color:#aaa;
+}
 
-        /* BẢNG */
+.balance{
+    color:#6c63ff;
+    font-weight:bold;
+}
 
-        .table-box {
-            overflow-x: auto;
-            background: #181b24;
-            border-radius: 15px;
-            border: 1px solid #292d38;
-        }
+input{
+    background:#0b0d12;
+    color:white;
+    border:1px solid #363a46;
+    border-radius:7px;
+    padding:9px;
+    width:120px;
+}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+button{
+    border:0;
+    padding:9px 13px;
+    border-radius:7px;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+}
 
-        th,
-        td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid #292d38;
-            white-space: nowrap;
-        }
+.add{
+    background:#168a4a;
+}
 
-        th {
-            color: #888;
-            font-size: 14px;
-        }
+.remove{
+    background:#b93636;
+}
 
-        td {
-            color: #ddd;
-        }
+.status{
+    background:#0b0d12;
+    color:white;
+    border:1px solid #363a46;
+    padding:8px;
+    border-radius:7px;
+}
 
-        tr:hover {
-            background: #1d2029;
-        }
-
-        select {
-            padding: 8px 10px;
-            background: #101218;
-            color: white;
-            border: 1px solid #444;
-            border-radius: 7px;
-            cursor: pointer;
-        }
-
-        button {
-            padding: 8px 13px;
-            margin-left: 5px;
-            border: none;
-            border-radius: 7px;
-            background: #6c63ff;
-            color: white;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #7b73ff;
-        }
-
-        .empty {
-            text-align: center;
-            padding: 50px;
-            color: #777;
-        }
-
-        .order-id {
-            font-weight: bold;
-        }
-
-        @media (max-width: 800px) {
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 500px) {
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+.back{
+    color:#8d87ff;
+    text-decoration:none;
+}
+</style>
 </head>
 
 <body>
 
 <div class="container">
 
-    <div class="top">
-
-        <h1>📦 Quản lý đơn hàng</h1>
+    <div class="header">
+        <h1>⚙️ Quản trị Baro's Market</h1>
 
         <a href="/admin/logout" class="logout">
             Đăng xuất
         </a>
+    </div>
+
+
+    <!-- ================= KHÁCH HÀNG ================= -->
+
+    <div class="box">
+
+        <h2>👥 Quản lý tài khoản khách hàng</h2>
+
+        <div class="table-wrap">
+
+        <table>
+
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Số dư</th>
+                <th>Ngày đăng ký</th>
+                <th>Thao tác</th>
+            </tr>
+
+            <% if (users.length === 0) { %>
+
+                <tr>
+                    <td colspan="6">
+                        Chưa có khách hàng.
+                    </td>
+                </tr>
+
+            <% } %>
+
+
+            <% users.forEach(user => { %>
+
+            <tr>
+
+                <td>
+                    #<%= user.id %>
+                </td>
+
+                <td>
+                    👤 <%= user.username %>
+                </td>
+
+                <td>
+                    <%= user.email %>
+                </td>
+
+                <td class="balance">
+                    <%= user.balance.toLocaleString("vi-VN") %>đ
+                </td>
+
+                <td>
+                    <%= user.time %>
+                </td>
+
+                <td>
+
+                    <form
+                        action="/admin/user/<%= user.id %>/balance"
+                        method="POST"
+                        style="display:inline-flex;gap:5px;flex-wrap:wrap;"
+                    >
+
+                        <input
+                            type="number"
+                            name="amount"
+                            min="1"
+                            placeholder="Số tiền"
+                            required
+                        >
+
+                        <button
+                            type="submit"
+                            name="action"
+                            value="add"
+                            class="add"
+                        >
+                            + Cộng
+                        </button>
+
+                        <button
+                            type="submit"
+                            name="action"
+                            value="remove"
+                            class="remove"
+                        >
+                            − Trừ
+                        </button>
+
+                    </form>
+
+                </td>
+
+            </tr>
+
+            <% }) %>
+
+        </table>
+
+        </div>
 
     </div>
 
 
-    <!-- ================= THỐNG KÊ ================= -->
+    <!-- ================= ĐƠN HÀNG ================= -->
 
-    <%
-        const totalOrders = orders.length;
+    <div class="box">
 
-        const pendingOrders = orders.filter(
-            order => order.status === "Chờ xử lý"
-        ).length;
+        <h2>📦 Quản lý đơn hàng</h2>
 
-        const completedOrders = orders.filter(
-            order => order.status === "Hoàn thành"
-        ).length;
+        <div class="table-wrap">
 
-        let revenue = 0;
+        <table>
 
-        orders.forEach(order => {
+            <tr>
+                <th>Mã đơn</th>
+                <th>Sản phẩm</th>
+                <th>Khách hàng</th>
+                <th>Email</th>
+                <th>Giá</th>
+                <th>Thời gian</th>
+                <th>Trạng thái</th>
+            </tr>
 
-            if (order.status === "Hoàn thành") {
+            <% if (orders.length === 0) { %>
 
-                const number = Number(
-                    order.price
-                        .replace(/\./g, "")
-                        .replace("đ", "")
-                );
+                <tr>
+                    <td colspan="7">
+                        Chưa có đơn hàng.
+                    </td>
+                </tr>
 
-                revenue += number;
-            }
-
-        });
-
-        const formattedRevenue = revenue.toLocaleString("vi-VN") + "đ";
-    %>
+            <% } %>
 
 
-    <div class="stats">
+            <% orders.forEach(order => { %>
 
-        <div class="stat">
-            <div class="stat-title">
-                📦 Tổng đơn hàng
-            </div>
+            <tr>
 
-            <div class="stat-number">
-                <%= totalOrders %>
-            </div>
-        </div>
+                <td>
+                    #<%= order.id %>
+                </td>
 
+                <td>
+                    <%= order.product %>
+                </td>
 
-        <div class="stat">
-            <div class="stat-title">
-                💰 Doanh thu
-            </div>
+                <td>
+                    <%= order.name %>
+                </td>
 
-            <div class="stat-number">
-                <%= formattedRevenue %>
-            </div>
-        </div>
+                <td>
+                    <%= order.email %>
+                </td>
 
+                <td>
+                    <%= order.price %>
+                </td>
 
-        <div class="stat">
-            <div class="stat-title">
-                🟡 Chờ xử lý
-            </div>
+                <td>
+                    <%= order.time %>
+                </td>
 
-            <div class="stat-number">
-                <%= pendingOrders %>
-            </div>
-        </div>
+                <td>
 
+                    <form
+                        action="/admin/order/<%= order.id %>/status"
+                        method="POST"
+                    >
 
-        <div class="stat">
-            <div class="stat-title">
-                🟢 Hoàn thành
-            </div>
+                        <select
+                            name="status"
+                            class="status"
+                            onchange="this.form.submit()"
+                        >
 
-            <div class="stat-number">
-                <%= completedOrders %>
-            </div>
+                            <option
+                                value="Chờ thanh toán"
+                                <%= order.status === "Chờ thanh toán" ? "selected" : "" %>
+                            >
+                                Chờ thanh toán
+                            </option>
+
+                            <option
+                                value="Chờ xác nhận thanh toán"
+                                <%= order.status === "Chờ xác nhận thanh toán" ? "selected" : "" %>
+                            >
+                                Chờ xác nhận
+                            </option>
+
+                            <option
+                                value="Đã thanh toán"
+                                <%= order.status === "Đã thanh toán" ? "selected" : "" %>
+                            >
+                                Đã thanh toán
+                            </option>
+
+                            <option
+                                value="Đang xử lý"
+                                <%= order.status === "Đang xử lý" ? "selected" : "" %>
+                            >
+                                Đang xử lý
+                            </option>
+
+                            <option
+                                value="Hoàn thành"
+                                <%= order.status === "Hoàn thành" ? "selected" : "" %>
+                            >
+                                Hoàn thành
+                            </option>
+
+                            <option
+                                value="Đã hủy"
+                                <%= order.status === "Đã hủy" ? "selected" : "" %>
+                            >
+                                Đã hủy
+                            </option>
+
+                        </select>
+
+                    </form>
+
+                </td>
+
+            </tr>
+
+            <% }) %>
+
+        </table>
+
         </div>
 
     </div>
 
 
-    <!-- ================= DANH SÁCH ĐƠN ================= -->
-
-    <div class="table-box">
-
-        <% if (orders.length === 0) { %>
-
-            <div class="empty">
-                Chưa có đơn hàng nào.
-            </div>
-
-        <% } else { %>
-
-            <table>
-
-                <thead>
-
-                    <tr>
-                        <th>Mã đơn</th>
-                        <th>Sản phẩm</th>
-                        <th>Khách hàng</th>
-                        <th>Email</th>
-                        <th>Giá</th>
-                        <th>Thời gian</th>
-                        <th>Trạng thái</th>
-                    </tr>
-
-                </thead>
-
-
-                <tbody>
-
-                    <% orders.forEach(order => { %>
-
-                        <tr>
-
-                            <td class="order-id">
-                                #<%= order.id %>
-                            </td>
-
-
-                            <td>
-                                <%= order.product %>
-                            </td>
-
-
-                            <td>
-                                <%= order.name %>
-                            </td>
-
-
-                            <td>
-                                <%= order.email %>
-                            </td>
-
-
-                            <td>
-                                <%= order.price %>
-                            </td>
-
-
-                            <td>
-                                <%= order.time %>
-                            </td>
-
-
-                            <td>
-
-                                <form
-                                    action="/admin/order/<%= order.id %>/status"
-                                    method="POST"
-                                >
-
-                                    <select name="status">
-
-                                        <option
-                                            value="Chờ xử lý"
-                                            <%= order.status === "Chờ xử lý" ? "selected" : "" %>
-                                        >
-                                            🟡 Chờ xử lý
-                                        </option>
-
-
-                                        <option
-                                            value="Đang xử lý"
-                                            <%= order.status === "Đang xử lý" ? "selected" : "" %>
-                                        >
-                                            🔵 Đang xử lý
-                                        </option>
-
-
-                                        <option
-                                            value="Hoàn thành"
-                                            <%= order.status === "Hoàn thành" ? "selected" : "" %>
-                                        >
-                                            🟢 Hoàn thành
-                                        </option>
-
-
-                                        <option
-                                            value="Đã hủy"
-                                            <%= order.status === "Đã hủy" ? "selected" : "" %>
-                                        >
-                                            🔴 Đã hủy
-                                        </option>
-
-                                    </select>
-
-
-                                    <button type="submit">
-                                        Lưu
-                                    </button>
-
-                                </form>
-
-                            </td>
-
-                        </tr>
-
-                    <% }) %>
-
-                </tbody>
-
-            </table>
-
-        <% } %>
-
-    </div>
+    <a href="/" class="back">
+        ← Về trang chủ
+    </a>
 
 </div>
 

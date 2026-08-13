@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Chi tiết tài khoản</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #0b0d12;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #aaa;
+            text-decoration: none;
+        }
+
+        .back:hover {
+            color: #fff;
+        }
+
+        .card {
+            background: #151821;
+            border: 1px solid #292d38;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        .info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .item {
+            background: #0f1219;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .label {
+            color: #888;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .value {
+            font-size: 16px;
+        }
+
+        .balance {
+            color: #6c63ff;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #292d38;
+            text-align: left;
+        }
+
+        th {
+            color: #aaa;
+        }
+
+        .add {
+            color: #4ade80;
+        }
+
+        .remove {
+            color: #f87171;
+        }
+
+        .empty {
+            color: #888;
+            text-align: center;
+            padding: 25px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        input {
+            background: #0f1219;
+            border: 1px solid #292d38;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        button {
+            border: 0;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .btn-add {
+            background: #16a34a;
+        }
+
+        .btn-remove {
+            background: #dc2626;
+        }
+
+        @media (max-width: 700px) {
+            .info {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <a class="back" href="/admin">
+        ← Quay lại quản lý
+    </a>
+
+    <div class="card">
+
+        <h1>👤 Chi tiết tài khoản</h1>
+
+        <div class="info">
+
+            <div class="item">
+                <div class="label">ID</div>
+                <div class="value">
+                    #<%= user.id %>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="label">Username</div>
+                <div class="value">
+                    <%= user.username %>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="label">Email</div>
+                <div class="value">
+                    <%= user.email %>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="label">Ngày đăng ký</div>
+                <div class="value">
+                    <%= user.time %>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="label">Số dư</div>
+                <div class="balance">
+                    <%= formatMoney(user.balance) %>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="buttons">
+
+            <form method="POST"
+                  action="/admin/user/<%= user.id %>/balance">
+
+                <input
+                    type="number"
+                    name="amount"
+                    placeholder="Số tiền"
+                    min="1"
+                    required
+                >
+
+                <button
+                    class="btn-add"
+                    name="action"
+                    value="add"
+                    type="submit">
+                    + Cộng tiền
+                </button>
+
+            </form>
+
+            <form method="POST"
+                  action="/admin/user/<%= user.id %>/balance">
+
+                <input
+                    type="number"
+                    name="amount"
+                    placeholder="Số tiền"
+                    min="1"
+                    required
+                >
+
+                <button
+                    class="btn-remove"
+                    name="action"
+                    value="remove"
+                    type="submit">
+                    − Trừ tiền
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>💰 Lịch sử giao dịch</h2>
+
+        <% if (transactions.length === 0) { %>
+
+            <div class="empty">
+                Chưa có giao dịch nào.
+            </div>
+
+        <% } else { %>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Loại</th>
+                        <th>Số tiền</th>
+                        <th>Mô tả</th>
+                        <th>Thời gian</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <% transactions.forEach(transaction => { %>
+
+                        <tr>
+
+                            <td>
+                                #<%= transaction.id %>
+                            </td>
+
+                            <td>
+                                <%= transaction.type %>
+                            </td>
+
+                            <td class="<%= transaction.amount >= 0 ? 'add' : 'remove' %>">
+
+                                <%= transaction.amount >= 0 ? '+' : '' %>
+                                <%= formatMoney(Math.abs(transaction.amount)) %>
+
+                            </td>
+
+                            <td>
+                                <%= transaction.description %>
+                            </td>
+
+                            <td>
+                                <%= transaction.time %>
+                            </td>
+
+                        </tr>
+
+                    <% }) %>
+
+                </tbody>
+
+            </table>
+
+        <% } %>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>📦 Đơn hàng</h2>
+
+        <% if (orders.length === 0) { %>
+
+            <div class="empty">
+                Người dùng chưa có đơn hàng.
+            </div>
+
+        <% } else { %>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Mã đơn</th>
+                        <th>Sản phẩm</th>
+                        <th>Giá</th>
+                        <th>Khách hàng</th>
+                        <th>Thời gian</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <% orders.forEach(order => { %>
+
+                        <tr>
+
+                            <td>
+                                #<%= order.id %>
+                            </td>
+
+                            <td>
+                                <%= order.product %>
+                            </td>
+
+                            <td>
+                                <%= order.price %>
+                            </td>
+
+                            <td>
+                                <%= order.name %>
+                            </td>
+
+                            <td>
+                                <%= order.time %>
+                            </td>
+
+                            <td>
+                                <%= order.status %>
+                            </td>
+
+                        </tr>
+
+                    <% }) %>
+
+                </tbody>
+
+            </table>
+
+        <% } %>
+
+    </div>
+
+</div>
+
+</body>
+</html>

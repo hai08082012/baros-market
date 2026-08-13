@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Tài khoản - Baro's Market</title>
+<style>
+body{margin:0;background:#0b0d12;color:white;font-family:Arial;padding:40px}
+.box{max-width:700px;margin:auto;background:#151821;padding:30px;border-radius:15px;border:1px solid #292d38}
+.balance{font-size:32px;color:#8b84ff;font-weight:bold}
+.item{padding:15px;border-bottom:1px solid #292d38}
+a{color:#8b84ff;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="box">
+
+<h1>👤 <%= user.username %></h1>
+
+<p>Email: <%= user.email %></p>
+
+<p>Số dư:</p>
+<div class="balance">
+💰 <%= user.balance.toLocaleString("vi-VN") %>đ
+</div>
+
+<br>
+
+<a href="/">← Về trang chủ</a>
+&nbsp;&nbsp;
+<a href="/logout">Đăng xuất</a>
+
+<h2>Lịch sử giao dịch</h2>
+
+<% if (transactions.length === 0) { %>
+<p>Chưa có giao dịch.</p>
+<% } %>
+
+<% transactions.forEach(t => { %>
+<div class="item">
+<b><%= t.type %></b><br>
+Số tiền: <%= t.amount.toLocaleString("vi-VN") %>đ<br>
+<%= t.description %><br>
+<small><%= t.time %></small>
+</div>
+<% }) %>
+
+</div>
+</body>
+</html>
